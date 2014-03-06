@@ -8,8 +8,6 @@ import android.view.MenuItem;
 
 public class MenuActivity extends Activity {
 
-	private static final String LOG_TAG = "MenuActivity";
-
 	// GOTCHA: Special sauce to automatically show menu when this Activity starts
 	@Override
 	public void onAttachedToWindow() {

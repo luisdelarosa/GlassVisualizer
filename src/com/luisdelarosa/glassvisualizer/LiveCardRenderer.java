@@ -83,7 +83,6 @@ public class LiveCardRenderer implements Callback {
 		for (int i = 0; i < toTransform.length; i++) {
 			int x = i;
 			int downy = (int) (100 - (toTransform[i] * 10));
-			int upy = 100;
 
 			//canvas.drawLine(x, downy, x, upy, paint);
 			

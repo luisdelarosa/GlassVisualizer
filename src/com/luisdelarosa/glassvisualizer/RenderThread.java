@@ -2,7 +2,6 @@ package com.luisdelarosa.glassvisualizer;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
@@ -11,11 +10,10 @@ import android.widget.Button;
 import ca.uol.aig.fftpack.RealDoubleFFT;
 
 public class RenderThread extends Thread {
-    private boolean mShouldRun;
-	private LiveCardRenderer liveCardRenderer;
+    private LiveCardRenderer liveCardRenderer;
 	
     int frequency = 8000;
-    int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
+    int channelConfiguration = AudioFormat.CHANNEL_IN_MONO;
     int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
     private RealDoubleFFT transformer;
     int blockSize = 256;
@@ -32,9 +30,7 @@ public class RenderThread extends Thread {
      */
     public RenderThread(LiveCardRenderer liveCardRenderer) {
         this.liveCardRenderer = liveCardRenderer;
-		mShouldRun = true;
-		
-        bitmap = Bitmap.createBitmap((int) 256, (int) 100,
+		bitmap = Bitmap.createBitmap((int) 256, (int) 100,
                 Bitmap.Config.ARGB_8888);
         canvas = new Canvas(bitmap);
         
@@ -42,19 +38,9 @@ public class RenderThread extends Thread {
     }
 
     /**
-     * Returns true if the rendering thread should continue to run.
-     *
-     * @return true if the rendering thread should continue to run
-     */
-    private synchronized boolean shouldRun() {
-        return mShouldRun;
-    }
-
-    /**
      * Requests that the rendering thread exit at the next opportunity.
      */
     public synchronized void quit() {
-        mShouldRun = false;
     }
 
     @Override
