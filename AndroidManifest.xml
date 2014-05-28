@@ -4,9 +4,14 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="15"
-        android:targetSdkVersion="15" />
+        android:minSdkVersion="19"
+        android:targetSdkVersion="19" />
 
+    <!--
+         Necessary permission since XE16.
+    	 See: http://stackoverflow.com/questions/23097828/why-is-my-voice-command-missing-from-the-ok-glass-menu-in-xe16
+    -->
+    <uses-permission android:name="com.google.android.glass.permission.DEVELOPMENT" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" >
     </uses-permission>
 
@@ -28,12 +33,11 @@
                 android:name="com.google.android.glass.VoiceTrigger"
                 android:resource="@xml/voice_trigger_start" />
         </service>
-        
+
         <activity
             android:name=".MenuActivity"
             android:theme="@style/MenuTheme" >
         </activity>
-        
     </application>
 
 </manifest>

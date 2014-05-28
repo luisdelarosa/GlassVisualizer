@@ -6,14 +6,11 @@ import android.os.IBinder;
 
 import com.google.android.glass.timeline.LiveCard;
 import com.google.android.glass.timeline.LiveCard.PublishMode;
-import com.google.android.glass.timeline.TimelineManager;
-
 
 public class LiveCardService extends Service {
 
 	private static final String LIVE_CARD_ID = "com.luisdelarosa.glassvisualizer.VISUALIZER_LIVE_CARD";
 	
-	private TimelineManager mTimelineManager;
 	private LiveCard mLiveCard;
 
 	private LiveCardRenderer mLiveCardRenderer;
@@ -26,13 +23,12 @@ public class LiveCardService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        mTimelineManager = TimelineManager.from(this);
     }
     
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (mLiveCard == null) {
-            mLiveCard = mTimelineManager.createLiveCard(LIVE_CARD_ID);
+            mLiveCard = new LiveCard(this, LIVE_CARD_ID);
 
             mLiveCard.setDirectRenderingEnabled(true);
             mLiveCardRenderer = new LiveCardRenderer();
